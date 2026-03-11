@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameSpace Store</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --card: #121826;
+      --accent: #3b82f6;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --hover: #1e293b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 32px;
+      background: linear-gradient(180deg, #0f172a, transparent);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 24px;
+      color: var(--accent);
+    }
+
+    nav a {
+      margin: 0 16px;
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    .search {
+      background: #0e2049;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 20px;
+      color: var(--text);
+      width: 220px;
+      transition: width 0.3s;
+    }
+
+    .search :focus {
+      width: 280px;
+      outline: none;
+    }
+
+    .hero {
+      margin: 24px 32px;
+      padding: 32px;
+      border-radius: 20px;
+      background: radial-gradient(circle at top right, #2563eb, #020617 60%);
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 24px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin: 0;
+    }
+
+    .hero p {
+      color: #c7d2fe;
+      max-width: 480px;
+      line-height: 1.5;
+    }
+
+    .hero button {
+      margin-top: 16px;
+      background: var(--accent);
+      border: none;
+      padding: 14px 28px;
+      border-radius: 10px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .hero button:hover {
+      background: #1d4ed8;
+    }
+
+    .hero-image {
+      background: linear-gradient(135deg, #1e293b, #020617);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 64px;
+      color: var(--text);
+      opacity: 0.85;
+    }
+
+    section {
+      padding: 0 32px 32px;
+    }
+
+    .section-title {
+      font-size: 32px;
+      margin: 24px 0 16px;
+      font-weight: 600;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .thumb {
+      height: 140px;
+      background: var(--hover);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 14px;
+    }
+
+    .card-body h3 {
+      margin: 0 0 6px;
+      font-size: 16px;
+    }
+
+    .price {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .badge button {
+      background: #16a34a;
+      border: none;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .badge button:hover {
+      background: #15803d;
+    }
+
+    footer {
+      padding: 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      border-top: 1px solid #1f2937;
+    }
+
+    @media (max-width:900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">GameSpace</div>
+    <nav>
+      <a href="#">Discover</a>
+      <a href="#">Store</a>
+      <a href="#">Library</a>
+      <a href="#">Community</a>
+    </nav>
+    <input id="searchBar" class="search" type="text" placeholder="Search games...">
+  </header>
+
+  <div class="hero">
+    <div>
+      <h1>Play Without Limits</h1>
+      <p>Buy or Rent Premium Pre-owned PC Games. Build your Library or just jump in for the Weekend.</p>
+      <button>Explore Deals</button>
+    </div>
+    <div class="hero-image">🎮</div>
+  </div>
+
+  <!-- Trending Now -->
+
+  <section>
+    <div class="section-title">Trending Now</div>
+    <div class="cards">
+      <a href="codui.html" class="card">
+        <div class="thumb"><img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkvM9jNJtZvD91sgLhcq4nlWLHea-qA35hSg&s"
+            alt="Call of Duty" /></div>
+        <div class="card-body">
+          <div class="item">Call of Duty®: Modern Warfare® II</div>
+          <div class="price"><span>₹1599</span><span class="badge"><button>Buy</button></span><span
+              class="badge"><button>Rent</button></span></div>
+        </div>
+      </a>
+      <a href="forzaui.html" class="card">
+        <div class="thumb"><img
+            src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1551360/capsule_616x353.jpg?t=1746471508"
+            alt="Forza Horizon 5" /></div>
+        <div class="card-body">
+          <div class="item">Forza Horizon 5</div>
+          <div class="price"><span>₹1799</span><span class="badge"><button>Buy</button></span><span
+              class="badge"><button>Rent</button></span></div>
+        </div>
+      </a>
+      <a href="cyberpunkui.html" class="card">
+        <div class="thumb"><img src="https://www.excal.on.ca/wp-content/uploads/2021/02/image3.png"
+            alt="Cyberpunk 2077" /></div>
+        <div class="card-body">
+          <div class="item">Cyberpunk 2077</div>
+          <div class="price"><span>₹2299</span><span class="badge"><button>Buy</button></span><span
+              class="badge"><button>Rent</button></span></div>
+        </div>
+      </a>
+      <a href="gtavui.html" class="card">
+        <div class="thumb"><img src="https://roadtovrlive-5ea0.kxcdn.com/wp-content/uploads/2014/11/gtav-featured.jpg"
+            alt="GTA V" /></div>
+        <div class="card-body">
+          <div class="item">Grand Theft Auto V Enhanced</div>
+          <div class="price"><span>₹999</span><span class="badge"><button>Buy</button></span><span
+              class="badge"><button>Rent</button></span></div>
+        </div>
+      </a>
+      <a href="bf6ui.html" class="card">
+        <div class="thumb"><img
+            src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2807960/c12d12ce3c7d217398d3fcad77427bfc9d57c570/header.jpg?t=1765583938"
+            alt="Battlefield 6" /></div>
+        <div class="card-body">
+          <div class="item">Battlefield™ 6</div>
+          <div class="price"><span>₹2599</span><span class="badge"><button>Buy</button></span><span
+              class="badge"><button>Rent</button></span></div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- New Releases -->
+  <section>
+
+    <div class="section-title">New Releases</div>
+    <div class="cards">
+      <a href="mw3ui.html" class="card">
+        <div class="thumb"><img
+            src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3595270/862980706af9711b9c79ba4be6cb551d72f343a5/capsule_616x353.jpg?t=1764711750"
+            alt="MW3" /></div>
+        <div class="card-body">
+          <div class="item">Call of Duty®: Modern Warfare® III</div>
+          <div class="price"><span>₹4999</span><span class="badge"><button>Buy</button></span><span
+              class="badge"><button>Rent</button></span></div>
+        </div>
+      </a>
+      <a href="eldenringui.html" class="card">
+        <div class="thumb"><img
+            src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2622380/header.jpg?t=1764808750"
+            alt="Elden Ring" /></div>
+        <div class="card-body">
+          <div class="item">ELDEN RING NIGHTREIGN</div>
+          <div class="price"><span>₹3499</span><span class="badge"><button>Buy</button></span><span
+              class="badge"><button>Rent</button></span></div>
+        </div>
+      </a>
+      <a href="assassianui.html" class="card">
+        <div class="thumb"><img
+            src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3159330/header.jpg?t=1767633876"
+            alt="Assassin Creed" /></div>
+        <div class="card-body">
+          <div class="item">Assassin’s Creed Shadows</div>
+          <div class="price"><span>₹2899</span><span class="badge"><button>Buy</button></span><span
+              class="badge"><button>Rent</button></span></div>
+        </div>
+      </a>
+      <a href="clairui.html" class="card">
+        <div class="thumb"><img
+            src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1903340/be3305b02d4db0dffa3458537118423bf2792d7e/header.jpg?t=1766050625"
+            alt="Clair Obscur" /></div>
+        <div class="card-body">
+          <div class="item">Clair Obscur: Expedition 33</div>
+          <div class="price"><span>₹1699</span><span class="badge"><button>Buy</button></span><span
+              class="badge"><button>Rent</button></span></div>
+        </div>
+      </a>
+      <a href="horizonforbiddenui.html" class="card">
+        <div class="thumb"><img
+            src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2420110/header.jpg?t=1763576690"
+            alt="Horizon forbidden" />
+        </div>
+        <div class="card-body">
+          <div class="item">Horizon Forbidden West</div>
+          <div class="price"><span>₹3699</span><span class="badge"><button>Buy</button></span><span
+              class="badge"><button>Rent</button></span></div>
+        </div>
+      </a>
+    </div>
+
+  </section>
+
+  <!--Simulation-->
+
+  <section>
+
+    <div class="section-title">Simulation</div>
+    <div class="cards">
+      <a href="ets2.html" class="card">
+        <div class="thumb"><img
+            src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/227300/9a81dc3126c56637297b654f9dcac057cfd79b77/header.jpg?t=1764266628"
+            alt="ets2" /></div>
+        <div class="card-body">
+          <div class="item">Euro Truck Simulator 2</div>
+          <div class="price"><span>₹699</span><span class="badge"><button>Buy</button></span><span
+              class="badge"><button>Rent</button></span></div>
+        </div>
+      </a>
+      <a href="fzm.html" class="card">
+        <div class="thumb"><img
+            src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2440510/header.jpg?t=1747073895"
+            alt="forzamotorsport" /></div>
+        <div class="card-body">
+          <div class="item">Forza Motorsport</div>
+          <div class="price"><span>₹3999</span><span class="badge"><button>Buy</button></span><span
+              class="badge"><button>Rent</button></span></div>
+        </div>
+      </a>
+      <a href="dirt5ui.html" class="card">
+        <div class="thumb"><img
+            src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1038250/header.jpg?t=1663755334"
+            alt="dirt 5" /></div>
+        <div class="card-body">
+          <div class="item">DIRT 5</div>
+          <div class="price"><span>₹999</span><span class="badge"><button>Buy</button></span><span
+              class="badge"><button>Rent</button></span></div>
+        </div>
+      </a>
+      <a href="assettoui.html" class="card">
+        <div class="thumb"><img
+            src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/244210/header.jpg?t=1754985171"
+            alt="assetto corsa" /></div>
+        <div class="card-body">
+          <div class="item">Assetto Corsa</div>
+          <div class="price"><span>₹199</span><span class="badge"><button>Buy</button></span><span
+              class="badge"><button>Rent</button></span></div>
+        </div>
+      </a>
+      <a href="bmngdrive.html" class="card">
+        <div class="thumb"><img
+            src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/284160/17f8af1312bc48e6cd90e5fb639d4981682af260/header.jpg?t=1769542627"
+            alt="beamngdrive" /></div>
+        <div class="card-body">
+          <div class="item">BeamNG.drive</div>
+          <div class="price"><span>₹899</span><span class="badge"><button>Buy</button></span><span
+              class="badge"><button>Rent</button></span></div>
+        </div>
+      </a>
+    </div>
+
+  </section>
+
+  <!-- Horror -->
+
+  <section>
+    <div class="section-title">Horror</div>
+    <div class="cards">
+      <a href="re4ui.html" class="card">
+        <div class="thumb"><img
+            src="https://shared.fastly.steamstatic.com//store_item_assets/steam/apps/2050650/capsule_616x353.jpg?t=1770093365"
+            alt="re4" /></div>
+        <div class="card-body">
+          <div class="item">Resident Evil 4</div>
+          <div class="price"><span>₹799</span><span class="badge"><button>Buy</button></span><span
+              class="badge"><button>Rent</button></span></div>
+        </div>
+      </a>
+      <a href="f2fui.html" class="card">
+        <div class="thumb"><img
+            src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2506160/header.jpg?t=1761626826"
+            alt="f2f" /></div>
+        <div class="card-body">
+          <div class="item">Fears to Fathom - Ironbark Lookout</div>
+          <div class="price"><span>₹299</span><span class="badge"><button>Buy</button></span><span
+              class="badge"><button>Rent</button></span></div>
+        </div>
+      </a>
+      <a href="Phasmophobia.html" class="card">
+        <div class="thumb"><img
+            src="https://shared.fastly.steamstatic.com//store_item_assets/steam/apps/739630/ca34091f988664f15ce31b912c210715add2766b/capsule_616x353.jpg?t=1770121432"
+            alt="Phasmophobia" /></div>
+        <div class="card-body">
+          <div class="item">Phasmophobia</div>
+          <div class="price"><span>₹699</span><span class="badge"><button>Buy</button></span><span
+              class="badge"><button>Rent</button></span></div>
+        </div>
+      </a>
+      <a href="alanwakeui.html" class="card">
+        <div class="thumb"><img
+            src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/108710/9c1728f937c2a7e632b447b02e442f6a5d88515c/header.jpg?t=1769717716"
+            alt="alan wake " /></div>
+        <div class="card-body">
+          <div class="item">Alan Wake</div>
+          <div class="price"><span>₹499</span><span class="badge"><button>Buy</button></span><span
+              class="badge"><button>Rent</button></span></div>
+        </div>
+      </a>
+      <a href="lastofusui.html" class="card">
+        <div class="thumb"><img
+            src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1888930/header.jpg?t=1750959031"
+            alt="last of us Part 1" /></div>
+        <div class="card-body">
+          <div class="item">Last of Us Part 1</div>
+          <div class="price"><span>₹3499</span><span class="badge"><button>Buy</button></span><span
+              class="badge"><button>Rent</button></span></div>
+        </div>
+      </a>
+    </div>
+  </section>
+  </div>
+  <footer>
+    © 2026 GameSpace. Buy • Rent • Play
+  </footer>
+  <script>
+    const searchBar = document.getElementById("searchBar");
+    searchBar.addEventListener("keyup", function () {
+      let searchText = searchBar.value.toLowerCase();
+      let cards = document.querySelectorAll(".card");
+      cards.forEach(function (card) {
+        let title = card.querySelector(".item").textContent.toLowerCase();
+        if (title.includes(searchText)) {
+          card.style.display = "";
+        }
+        else {
+          card.style.display = "none";
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

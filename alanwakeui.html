@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alan Wake</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #0b0f14;
+      color: #e5e7eb;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 32px;
+      background: #121826;
+      position: sticky;
+      top: 0;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 24px;
+      color: #3b82f6;
+    }
+
+    nav a {
+      margin: 0 12px;
+      color: #9ca3af;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #e5e7eb;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .thumb {
+      flex: 1 1 400px;
+    }
+
+    .thumb img {
+      width: 100%;
+      border-radius: 12px;
+    }
+
+    .info {
+      flex: 1 1 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .info h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+
+    .info p {
+      line-height: 1.6;
+      color: #c7d2fe;
+    }
+
+    .price {
+      font-size: 24px;
+      color: #16a34a;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .buttons button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .buy {
+      background: #16a34a;
+      color: white;
+    }
+
+    .buy:hover {
+      background: #15803d;
+    }
+
+    .rent {
+      background: #2563eb;
+      color: white;
+    }
+
+    .rent:hover {
+      background: #1d4ed8;
+    }
+
+    footer {
+      padding: 24px;
+      text-align: center;
+      font-size: 13px;
+      color: #9ca3af;
+      border-top: 1px solid #1f2937;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">GameSpace</div>
+    <nav>
+      <a href="ui.html">Home</a>
+      <a href="#">Store</a>
+      <a href="#">Library</a>
+      <a href="#">Community</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="thumb">
+      <img
+        src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/108710/9c1728f937c2a7e632b447b02e442f6a5d88515c/header.jpg?t=1769717716"
+        alt="alan wake 2" />
+    </div>
+    <div class="info">
+      <h1>Alan Wake</h1>
+      <p>A Dark Presence stalks the small town of Bright Falls, pushing Alan Wake to the 
+        brink of sanity in his fight to unravel the mystery and save his love.</p>
+      <div class="price">₹499</div>
+      <div class="buttons">
+        <button class="buy">Buy Now</button>
+        <button class="rent">Rent</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © 2026 GameSpace. Buy • Rent • Play
+  </footer>
+
+</body>
+
+</html>
