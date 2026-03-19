@@ -209,6 +209,380 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* ── CART STYLES ── */
+
+    /* Cart icon button in header */
+    .cart-btn {
+      position: relative;
+      background: #1e293b;
+      border: 1px solid #2d3f5e;
+      border-radius: 10px;
+      padding: 8px 14px;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s, border-color 0.2s;
+      margin-left: 16px;
+    }
+
+    .cart-btn:hover {
+      background: #273549;
+      border-color: var(--accent);
+    }
+
+    .cart-btn .cart-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: var(--accent);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      transition: transform 0.2s;
+    }
+
+    .cart-count.bump {
+      transform: scale(1.4);
+    }
+
+    /* Overlay */
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 99;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .cart-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* Drawer */
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 400px;
+      max-width: 95vw;
+      height: 100vh;
+      background: #0d1623;
+      border-left: 1px solid #1e2d45;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: -8px 0 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .cart-drawer.open {
+      transform: translateX(0);
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      border-bottom: 1px solid #1e2d45;
+    }
+
+    .cart-header h2 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .cart-header .cart-close {
+      background: #1e293b;
+      border: 1px solid #2d3f5e;
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 18px;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .cart-header .cart-close:hover {
+      color: var(--text);
+      border-color: var(--accent);
+    }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 24px;
+      scrollbar-width: thin;
+      scrollbar-color: #1e2d45 transparent;
+    }
+
+    .cart-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: var(--muted);
+      gap: 12px;
+      font-size: 14px;
+    }
+
+    .cart-empty .empty-icon {
+      font-size: 52px;
+      opacity: 0.4;
+    }
+
+    /* Single cart item */
+    .cart-item {
+      display: flex;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid #1a2535;
+      animation: slideIn 0.25s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .cart-item-thumb {
+      width: 64px;
+      height: 64px;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: var(--hover);
+    }
+
+    .cart-item-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .cart-item-title {
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .cart-item-type {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      background: #1a2535;
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .qty-btn {
+      background: #1e293b;
+      border: 1px solid #2d3f5e;
+      color: var(--text);
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      padding: 0;
+      line-height: 1;
+    }
+
+    .qty-btn:hover {
+      background: #273549;
+    }
+
+    .qty-val {
+      font-size: 14px;
+      font-weight: 600;
+      min-width: 18px;
+      text-align: center;
+    }
+
+    .cart-item-price {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      white-space: nowrap;
+      align-self: center;
+    }
+
+    .cart-item-remove {
+      background: none;
+      border: none;
+      color: #4b5563;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 4px;
+      transition: color 0.2s;
+      align-self: center;
+    }
+
+    .cart-item-remove:hover {
+      color: #ef4444;
+    }
+
+    /* Footer of cart */
+    .cart-footer {
+      padding: 20px 24px;
+      border-top: 1px solid #1e2d45;
+      background: #0a1120;
+    }
+
+    .cart-summary {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+      font-size: 13px;
+    }
+
+    .cart-summary-row {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+    }
+
+    .cart-summary-row.total {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      border-top: 1px solid #1e2d45;
+      padding-top: 10px;
+      margin-top: 4px;
+    }
+
+    .cart-summary-row.total span:last-child {
+      color: var(--accent);
+    }
+
+    .checkout-btn {
+      width: 100%;
+      background: var(--accent);
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      color: white;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.1s;
+    }
+
+    .checkout-btn:hover {
+      background: #1d4ed8;
+    }
+
+    .checkout-btn:active {
+      transform: scale(0.98);
+    }
+
+    .clear-cart-btn {
+      width: 100%;
+      background: transparent;
+      border: 1px solid #2d3f5e;
+      padding: 10px;
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .clear-cart-btn:hover {
+      border-color: #ef4444;
+      color: #ef4444;
+    }
+
+    /* Toast notification */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #1e293b;
+      border: 1px solid #2d4a7a;
+      color: var(--text);
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .toast .toast-icon {
+      font-size: 18px;
+    }
+
+    /* header right group */
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
   </style>
 </head>
 
@@ -222,7 +596,13 @@
       <a href="#">Library</a>
       <a href="#">Community</a>
     </nav>
-    <input id="searchBar" class="search" type="text" placeholder="Search games...">
+    <div class="header-right">
+      <input id="searchBar" class="search" type="text" placeholder="Search games...">
+      <button class="cart-btn" id="cartBtn" onclick="toggleCart()">
+        🛒 <span class="cart-label">Cart</span>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
   </header>
 
   <div class="hero">
@@ -235,7 +615,6 @@
   </div>
 
   <!-- Trending Now -->
-
   <section>
     <div class="section-title">Trending Now</div>
     <div class="cards">
@@ -245,8 +624,12 @@
             alt="Call of Duty" /></div>
         <div class="card-body">
           <div class="item">Call of Duty®: Modern Warfare® II</div>
-          <div class="price"><span>₹1599</span><span class="badge"><button>Buy</button></span><span
-              class="badge"><button>Rent</button></span></div>
+          <div class="price"><span>₹1599</span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Call of Duty®: Modern Warfare® II',1599,'buy','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkvM9jNJtZvD91sgLhcq4nlWLHea-qA35hSg&s')">Buy</button></span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Call of Duty®: Modern Warfare® II',399,'rent','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkvM9jNJtZvD91sgLhcq4nlWLHea-qA35hSg&s')">Rent</button></span>
+          </div>
         </div>
       </a>
       <a href="forzaui.html" class="card">
@@ -255,8 +638,12 @@
             alt="Forza Horizon 5" /></div>
         <div class="card-body">
           <div class="item">Forza Horizon 5</div>
-          <div class="price"><span>₹1799</span><span class="badge"><button>Buy</button></span><span
-              class="badge"><button>Rent</button></span></div>
+          <div class="price"><span>₹1799</span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Forza Horizon 5',1799,'buy','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1551360/capsule_616x353.jpg?t=1746471508')">Buy</button></span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Forza Horizon 5',449,'rent','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1551360/capsule_616x353.jpg?t=1746471508')">Rent</button></span>
+          </div>
         </div>
       </a>
       <a href="cyberpunkui.html" class="card">
@@ -264,8 +651,12 @@
             alt="Cyberpunk 2077" /></div>
         <div class="card-body">
           <div class="item">Cyberpunk 2077</div>
-          <div class="price"><span>₹2299</span><span class="badge"><button>Buy</button></span><span
-              class="badge"><button>Rent</button></span></div>
+          <div class="price"><span>₹2299</span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Cyberpunk 2077',2299,'buy','https://www.excal.on.ca/wp-content/uploads/2021/02/image3.png')">Buy</button></span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Cyberpunk 2077',499,'rent','https://www.excal.on.ca/wp-content/uploads/2021/02/image3.png')">Rent</button></span>
+          </div>
         </div>
       </a>
       <a href="gtavui.html" class="card">
@@ -273,8 +664,12 @@
             alt="GTA V" /></div>
         <div class="card-body">
           <div class="item">Grand Theft Auto V Enhanced</div>
-          <div class="price"><span>₹999</span><span class="badge"><button>Buy</button></span><span
-              class="badge"><button>Rent</button></span></div>
+          <div class="price"><span>₹999</span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Grand Theft Auto V Enhanced',999,'buy','https://roadtovrlive-5ea0.kxcdn.com/wp-content/uploads/2014/11/gtav-featured.jpg')">Buy</button></span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Grand Theft Auto V Enhanced',249,'rent','https://roadtovrlive-5ea0.kxcdn.com/wp-content/uploads/2014/11/gtav-featured.jpg')">Rent</button></span>
+          </div>
         </div>
       </a>
       <a href="bf6ui.html" class="card">
@@ -283,8 +678,12 @@
             alt="Battlefield 6" /></div>
         <div class="card-body">
           <div class="item">Battlefield™ 6</div>
-          <div class="price"><span>₹2599</span><span class="badge"><button>Buy</button></span><span
-              class="badge"><button>Rent</button></span></div>
+          <div class="price"><span>₹2599</span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Battlefield™ 6',2599,'buy','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2807960/c12d12ce3c7d217398d3fcad77427bfc9d57c570/header.jpg?t=1765583938')">Buy</button></span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Battlefield™ 6',649,'rent','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2807960/c12d12ce3c7d217398d3fcad77427bfc9d57c570/header.jpg?t=1765583938')">Rent</button></span>
+          </div>
         </div>
       </a>
     </div>
@@ -292,7 +691,6 @@
 
   <!-- New Releases -->
   <section>
-
     <div class="section-title">New Releases</div>
     <div class="cards">
       <a href="mw3ui.html" class="card">
@@ -301,8 +699,12 @@
             alt="MW3" /></div>
         <div class="card-body">
           <div class="item">Call of Duty®: Modern Warfare® III</div>
-          <div class="price"><span>₹4999</span><span class="badge"><button>Buy</button></span><span
-              class="badge"><button>Rent</button></span></div>
+          <div class="price"><span>₹4999</span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Call of Duty®: Modern Warfare® III',4999,'buy','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3595270/862980706af9711b9c79ba4be6cb551d72f343a5/capsule_616x353.jpg?t=1764711750')">Buy</button></span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Call of Duty®: Modern Warfare® III',999,'rent','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3595270/862980706af9711b9c79ba4be6cb551d72f343a5/capsule_616x353.jpg?t=1764711750')">Rent</button></span>
+          </div>
         </div>
       </a>
       <a href="eldenringui.html" class="card">
@@ -311,8 +713,12 @@
             alt="Elden Ring" /></div>
         <div class="card-body">
           <div class="item">ELDEN RING NIGHTREIGN</div>
-          <div class="price"><span>₹3499</span><span class="badge"><button>Buy</button></span><span
-              class="badge"><button>Rent</button></span></div>
+          <div class="price"><span>₹3499</span>
+            <span class="badge"><button
+                onclick="addToCart(event,'ELDEN RING NIGHTREIGN',3499,'buy','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2622380/header.jpg?t=1764808750')">Buy</button></span>
+            <span class="badge"><button
+                onclick="addToCart(event,'ELDEN RING NIGHTREIGN',749,'rent','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2622380/header.jpg?t=1764808750')">Rent</button></span>
+          </div>
         </div>
       </a>
       <a href="assassianui.html" class="card">
@@ -320,9 +726,13 @@
             src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3159330/header.jpg?t=1767633876"
             alt="Assassin Creed" /></div>
         <div class="card-body">
-          <div class="item">Assassin’s Creed Shadows</div>
-          <div class="price"><span>₹2899</span><span class="badge"><button>Buy</button></span><span
-              class="badge"><button>Rent</button></span></div>
+          <div class="item">Assassin's Creed Shadows</div>
+          <div class="price"><span>₹2899</span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Assassin\'s Creed Shadows',2899,'buy','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3159330/header.jpg?t=1767633876')">Buy</button></span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Assassin\'s Creed Shadows',649,'rent','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3159330/header.jpg?t=1767633876')">Rent</button></span>
+          </div>
         </div>
       </a>
       <a href="clairui.html" class="card">
@@ -331,29 +741,33 @@
             alt="Clair Obscur" /></div>
         <div class="card-body">
           <div class="item">Clair Obscur: Expedition 33</div>
-          <div class="price"><span>₹1699</span><span class="badge"><button>Buy</button></span><span
-              class="badge"><button>Rent</button></span></div>
+          <div class="price"><span>₹1699</span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Clair Obscur: Expedition 33',1699,'buy','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1903340/be3305b02d4db0dffa3458537118423bf2792d7e/header.jpg?t=1766050625')">Buy</button></span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Clair Obscur: Expedition 33',399,'rent','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1903340/be3305b02d4db0dffa3458537118423bf2792d7e/header.jpg?t=1766050625')">Rent</button></span>
+          </div>
         </div>
       </a>
       <a href="horizonforbiddenui.html" class="card">
         <div class="thumb"><img
             src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2420110/header.jpg?t=1763576690"
-            alt="Horizon forbidden" />
-        </div>
+            alt="Horizon forbidden" /></div>
         <div class="card-body">
           <div class="item">Horizon Forbidden West</div>
-          <div class="price"><span>₹3699</span><span class="badge"><button>Buy</button></span><span
-              class="badge"><button>Rent</button></span></div>
+          <div class="price"><span>₹3699</span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Horizon Forbidden West',3699,'buy','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2420110/header.jpg?t=1763576690')">Buy</button></span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Horizon Forbidden West',849,'rent','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2420110/header.jpg?t=1763576690')">Rent</button></span>
+          </div>
         </div>
       </a>
     </div>
-
   </section>
 
-  <!--Simulation-->
-
+  <!-- Simulation -->
   <section>
-
     <div class="section-title">Simulation</div>
     <div class="cards">
       <a href="ets2.html" class="card">
@@ -362,8 +776,12 @@
             alt="ets2" /></div>
         <div class="card-body">
           <div class="item">Euro Truck Simulator 2</div>
-          <div class="price"><span>₹699</span><span class="badge"><button>Buy</button></span><span
-              class="badge"><button>Rent</button></span></div>
+          <div class="price"><span>₹699</span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Euro Truck Simulator 2',699,'buy','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/227300/9a81dc3126c56637297b654f9dcac057cfd79b77/header.jpg?t=1764266628')">Buy</button></span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Euro Truck Simulator 2',149,'rent','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/227300/9a81dc3126c56637297b654f9dcac057cfd79b77/header.jpg?t=1764266628')">Rent</button></span>
+          </div>
         </div>
       </a>
       <a href="fzm.html" class="card">
@@ -372,8 +790,12 @@
             alt="forzamotorsport" /></div>
         <div class="card-body">
           <div class="item">Forza Motorsport</div>
-          <div class="price"><span>₹3999</span><span class="badge"><button>Buy</button></span><span
-              class="badge"><button>Rent</button></span></div>
+          <div class="price"><span>₹3999</span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Forza Motorsport',3999,'buy','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2440510/header.jpg?t=1747073895')">Buy</button></span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Forza Motorsport',899,'rent','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2440510/header.jpg?t=1747073895')">Rent</button></span>
+          </div>
         </div>
       </a>
       <a href="dirt5ui.html" class="card">
@@ -382,8 +804,12 @@
             alt="dirt 5" /></div>
         <div class="card-body">
           <div class="item">DIRT 5</div>
-          <div class="price"><span>₹999</span><span class="badge"><button>Buy</button></span><span
-              class="badge"><button>Rent</button></span></div>
+          <div class="price"><span>₹999</span>
+            <span class="badge"><button
+                onclick="addToCart(event,'DIRT 5',999,'buy','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1038250/header.jpg?t=1663755334')">Buy</button></span>
+            <span class="badge"><button
+                onclick="addToCart(event,'DIRT 5',249,'rent','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1038250/header.jpg?t=1663755334')">Rent</button></span>
+          </div>
         </div>
       </a>
       <a href="assettoui.html" class="card">
@@ -392,8 +818,12 @@
             alt="assetto corsa" /></div>
         <div class="card-body">
           <div class="item">Assetto Corsa</div>
-          <div class="price"><span>₹199</span><span class="badge"><button>Buy</button></span><span
-              class="badge"><button>Rent</button></span></div>
+          <div class="price"><span>₹199</span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Assetto Corsa',199,'buy','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/244210/header.jpg?t=1754985171')">Buy</button></span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Assetto Corsa',49,'rent','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/244210/header.jpg?t=1754985171')">Rent</button></span>
+          </div>
         </div>
       </a>
       <a href="bmngdrive.html" class="card">
@@ -402,16 +832,17 @@
             alt="beamngdrive" /></div>
         <div class="card-body">
           <div class="item">BeamNG.drive</div>
-          <div class="price"><span>₹899</span><span class="badge"><button>Buy</button></span><span
-              class="badge"><button>Rent</button></span></div>
+          <div class="price"><span>₹899</span>
+            <span class="badge">
+            <span class="badge"><button
+                onclick="addToCart(event,'BeamNG.drive',899,'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/284160/17f8af1312bc48e6cd90e5fb639d4981682af260/header.jpg?t=1769542627')">Add to Cart</button></span>
+          </div>
         </div>
       </a>
     </div>
-
   </section>
 
   <!-- Horror -->
-
   <section>
     <div class="section-title">Horror</div>
     <div class="cards">
@@ -421,8 +852,11 @@
             alt="re4" /></div>
         <div class="card-body">
           <div class="item">Resident Evil 4</div>
-          <div class="price"><span>₹799</span><span class="badge"><button>Buy</button></span><span
-              class="badge"><button>Rent</button></span></div>
+          <div class="price"><span>₹799</span>
+            <span class="badge">
+            <span class="badge"><button
+                onclick="addToCart(event,'Resident Evil 4',799,'rent','https://shared.fastly.steamstatic.com//store_item_assets/steam/apps/2050650/capsule_616x353.jpg?t=1770093365')">Add to Cart</button></span>
+          </div>
         </div>
       </a>
       <a href="f2fui.html" class="card">
@@ -431,8 +865,11 @@
             alt="f2f" /></div>
         <div class="card-body">
           <div class="item">Fears to Fathom - Ironbark Lookout</div>
-          <div class="price"><span>₹299</span><span class="badge"><button>Buy</button></span><span
-              class="badge"><button>Rent</button></span></div>
+          <div class="price"><span>₹299</span>
+            <span class="badge">
+            <span class="badge"><button
+                onclick="addToCart(event,'Fears to Fathom - Ironbark Lookout',299,'rent','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2506160/header.jpg?t=1761626826')">Add to Cart</button></span>
+          </div>
         </div>
       </a>
       <a href="Phasmophobia.html" class="card">
@@ -441,8 +878,11 @@
             alt="Phasmophobia" /></div>
         <div class="card-body">
           <div class="item">Phasmophobia</div>
-          <div class="price"><span>₹699</span><span class="badge"><button>Buy</button></span><span
-              class="badge"><button>Rent</button></span></div>
+          <div class="price"><span>₹699</span>
+            <span class="badge">
+            <span class="badge"><button
+                onclick="addToCart(event,'Phasmophobia',699,'https://shared.fastly.steamstatic.com//store_item_assets/steam/apps/739630/ca34091f988664f15ce31b912c210715add2766b/capsule_616x353.jpg?t=1770121432')">Add to Cart</button></span>
+          </div>
         </div>
       </a>
       <a href="alanwakeui.html" class="card">
@@ -451,8 +891,10 @@
             alt="alan wake " /></div>
         <div class="card-body">
           <div class="item">Alan Wake</div>
-          <div class="price"><span>₹499</span><span class="badge"><button>Buy</button></span><span
-              class="badge"><button>Rent</button></span></div>
+          <div class="price"><span>₹499</span>
+            <span class="badge"><button
+                onclick="addToCart(event,'Alan Wake',499,'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/108710/9c1728f937c2a7e632b447b02e442f6a5d88515c/header.jpg?t=1769717716')">Add to Cart</button></span>
+          </div>
         </div>
       </a>
       <a href="lastofusui.html" class="card">
@@ -461,29 +903,162 @@
             alt="last of us Part 1" /></div>
         <div class="card-body">
           <div class="item">Last of Us Part 1</div>
-          <div class="price"><span>₹3499</span><span class="badge"><button>Buy</button></span><span
-              class="badge"><button>Rent</button></span></div>
+          <div class="price"><span>₹3499</span>
+            <span class="badge">
+            <span class="badge"><button
+                onclick="addToCart(event,'Last of Us Part 1',3499,'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1888930/header.jpg?t=1750959031')">Add to Cart</button></span>
+          </div>
         </div>
       </a>
     </div>
   </section>
-  </div>
+
   <footer>
     © 2026 GameSpace. Buy • Rent • Play
   </footer>
+
+  <!-- Cart Overlay -->
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+  <!-- Cart Drawer -->
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h2>🛒 Your Cart</h2>
+      <button class="cart-close" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty">
+        <span class="empty-icon">🎮</span>
+        <span>Your cart is empty</span>
+        <span style="font-size:12px;color:#4b5563">Add games using Buy or Rent buttons</span>
+      </div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none">
+      <div class="cart-summary" id="cartSummary"></div>
+      <button class="checkout-btn" onclick="checkout()">Proceed to Checkout →</button>
+      <button class="clear-cart-btn" onclick="clearCart()">Clear Cart</button>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <!--<div class="toast" id="toast">
+    <span class="toast-icon">✅</span>
+    <span id="toastMsg">Added to cart</span>
+  </div>-->
+
   <script>
+    // ── Cart state ──
+    let cart = [];
+
+    function cartKey(name, type) { return name + '::' + type; }
+
+    function addToCart(e, name, price, type, img) {
+      e.preventDefault();
+      e.stopPropagation();
+      const key = cartKey(name, type);
+      const existing = cart.find(i => i.key === key);
+      if (existing) {
+        existing.qty++;
+      } else {
+        cart.push({ key, name, price, type, img, qty: 1 });
+      }
+      renderCart();
+      updateCount();
+      showToast(`${type === 'rent' ? '🔑 Renting' : '🛍 Buying'} <b>${name}</b>`);
+
+    }
+
+    function changeQty(key, delta) {
+      const item = cart.find(i => i.key === key);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) cart = cart.filter(i => i.key !== key);
+      renderCart();
+      updateCount();
+    }
+
+    function removeItem(key) {
+      cart = cart.filter(i => i.key !== key);
+      renderCart();
+      updateCount();
+    }
+
+    function clearCart() {
+      cart = [];
+      renderCart();
+      updateCount();
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cartItems');
+      const footer = document.getElementById('cartFooter');
+      const summary = document.getElementById('cartSummary');
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="cart-empty">
+            <span class="empty-icon">🎮</span>
+            <span>Your cart is empty</span>
+            <span style="font-size:12px;color:#4b5563">Add games using Buy or Rent buttons</span>
+          </div>`;
+        footer.style.display = 'none';
+        return;
+      }
+
+      footer.style.display = 'block';
+      container.innerHTML = cart.map(item => `
+        <div class="cart-item">
+          <img class="cart-item-thumb" src="${item.img}" alt="${item.name}" onerror="this.style.background='#1e293b'">
+          <div class="cart-item-info">
+            <div class="cart-item-title">${item.name}</div>
+            <div class="cart-item-controls">
+              <button class="qty-btn" onclick="changeQty('${item.key}', -1)">−</button>
+              <span class="qty-val">${item.qty}</span>
+              <button class="qty-btn" onclick="changeQty('${item.key}', 1)">+</button>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between">
+            <button class="cart-item-remove" onclick="removeItem('${item.key}')">🗑</button>
+            <span class="cart-item-price">₹${(item.price * item.qty).toLocaleString('en-IN')}</span>
+          </div>
+        </div>
+      `).join('');
+
+      const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+      const items = cart.reduce((s, i) => s + i.qty, 0);
+      const gst = Math.round(subtotal * 0.18);
+      summary.innerHTML = `
+        <div class="cart-summary-row"><span>${items} item${items !== 1 ? 's' : ''}</span><span>₹${subtotal.toLocaleString('en-IN')}</span></div>
+        <div class="cart-summary-row"><span>GST (18%)</span><span>₹${gst.toLocaleString('en-IN')}</span></div>
+        <div class="cart-summary-row total"><span>Total</span><span>₹${(subtotal + gst).toLocaleString('en-IN')}</span></div>
+      `;
+    }
+
+    function updateCount() {
+      const total = cart.reduce((s, i) => s + i.qty, 0);
+      const badge = document.getElementById('cartCount');
+      badge.textContent = total;
+      badge.classList.add('bump');
+      setTimeout(() => badge.classList.remove('bump'), 200);
+    }
+
+    function toggleCart() {
+      document.getElementById('cartDrawer').classList.toggle('open');
+      document.getElementById('cartOverlay').classList.toggle('open');
+    }
+
+    function checkout() {
+      alert('🎮 Proceeding to checkout!\n\nTotal items: ' + cart.reduce((s, i) => s + i.qty, 0));
+    }
+
+    // Search (original)
     const searchBar = document.getElementById("searchBar");
     searchBar.addEventListener("keyup", function () {
       let searchText = searchBar.value.toLowerCase();
       let cards = document.querySelectorAll(".card");
       cards.forEach(function (card) {
         let title = card.querySelector(".item").textContent.toLowerCase();
-        if (title.includes(searchText)) {
-          card.style.display = "";
-        }
-        else {
-          card.style.display = "none";
-        }
+        card.style.display = title.includes(searchText) ? "" : "none";
       });
     });
   </script>
