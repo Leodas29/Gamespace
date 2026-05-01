@@ -1,77 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Buy Resident Evil 4</title>
+  <title>Buy or Rent - GameSpace</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      color: #e5e7eb;
-      background: #0b0f14 no-repeat center center fixed;
-      background-size: cover;
-      transition: background 1s ease-in-out;
+    :root {
+      --bg: #0b0f14;
+      --card: #121826;
+      --accent: #3b82f6;
+      --accent-glow: rgba(59, 130, 246, 0.3);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1e2d45;
     }
-    .overlay {
-      background: rgba(0,0,0,0.7);
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      background-image: radial-gradient(circle at 0% 0%, #162036 0%, transparent 40%);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
       min-height: 100vh;
       padding: 40px 20px;
     }
-    .container {
-      max-width: 600px;
-      margin: 40px auto;
-      background: #121826;
-      padding: 32px;
+
+    .back-nav {
+      position: absolute;
+      top: 40px;
+      left: 40px;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .back-nav:hover { color: var(--text); }
+
+    .product-container {
+      max-width: 1100px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .game-preview { position: relative; perspective: 1000px; }
+
+    .game-preview img {
+      width: 100%;
+      border-radius: 24px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+      border: 1px solid var(--border);
+      transition: transform 0.5s ease;
+    }
+
+    .game-preview:hover img { transform: rotateY(-5deg) rotateX(2deg); }
+
+    .purchase-card {
+      background: rgba(18, 24, 38, 0.8);
+      backdrop-filter: blur(12px);
+      padding: 48px;
+      border-radius: 32px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .tag {
+      display: inline-block;
+      background: rgba(59, 130, 246, 0.1);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .game-meta h1 { font-size: 42px; margin: 0 0 12px 0; letter-spacing: -1px; }
+
+    .game-meta p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    .options-group { display: flex; flex-direction: column; gap: 16px; }
+
+    .option-box {
+      border: 1px solid var(--border);
+      padding: 24px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .option-box:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: #334155;
+      transform: translateY(-2px);
+    }
+
+    .option-box.active {
+      border-color: var(--accent);
+      background: rgba(59, 130, 246, 0.05);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .option-info h3 { margin: 0; font-size: 19px; font-weight: 600; }
+
+    .option-info p { margin: 4px 0 0 0; font-size: 13px; color: var(--muted); }
+
+    .price-tag { font-size: 22px; font-weight: 800; color: var(--text); }
+
+    .active .price-tag { color: var(--accent); }
+
+    .action-button {
+      width: 100%;
+      margin-top: 32px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 20px;
       border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-      animation: fadeInUp 1s ease-out;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+      transition: all 0.3s;
     }
-    h1 { color: #3b82f6; text-align: center; }
-    label { display:block; margin-top:16px; font-weight:600; }
-    input, select {
-      width:100%; padding:12px; margin-top:8px;
-      border-radius:8px; border:none; background:#1f2937; color:#e5e7eb;
+
+    .action-button:hover {
+      background: #2563eb;
+      box-shadow: 0 15px 30px rgba(59, 130, 246, 0.4);
+      transform: translateY(-2px);
     }
-    button {
-      margin-top:24px; padding:14px; width:100%;
-      background: linear-gradient(90deg, #16a34a, #22c55e);
-      color:white; border:none; border-radius:10px; font-weight:700;
-      cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    @media (max-width: 900px) {
+      .product-container { grid-template-columns: 1fr; gap: 40px; }
+      .back-nav { top: 20px; left: 20px; }
+      .game-meta h1 { font-size: 32px; }
     }
-    button:hover { transform: translateY(-3px); box-shadow:0 6px 15px rgba(22,163,74,0.6); }
-    @keyframes fadeInUp { from{opacity:0; transform:translateY(30px);} to{opacity:1; transform:translateY(0);} }
   </style>
 </head>
+
 <body>
-  <div class="overlay">
-    <div class="container">
-      <h1>Buy Resident Evil 4</h1>
-      <form>
-        <label>Full Name</label>
-        <input type="text" required>
-        <label>Email (Activation Key will be sent here)</label>
-        <input type="email" required>
-        <label>Payment Method</label>
-        <select required>
-          <option value="">Select</option>
-          <option>Credit Card</option>
-          <option>Debit Card</option>
-          <option>UPI</option>
-          <option>Net Banking</option>
-          <option>PayPal</option>
-        </select>
-        <button type="submit">Confirm Purchase</button>
-      </form>
+
+  <a href="ui.html" class="back-nav">← Back to Store</a>
+
+  <div class="product-container">
+    <div class="game-preview">
+      <img id="gameImg" src="images/placeholder.jpg" alt="Loading...">
+    </div>
+
+    <div class="purchase-card">
+      <div class="game-meta">
+        <span class="tag">Digital & Physical Available</span>
+        <h1 id="gameTitle">Title</h1>
+        <p>Get ready for an immersive experience. Buy to keep forever or rent for a quick weekend playthrough. All pre-owned discs are quality-checked.</p>
+      </div>
+
+      <div class="options-group">
+        <div class="option-box active" onclick="selectOption(this, 'Buy')">
+          <div class="option-info">
+            <h3>Buy Forever</h3>
+            <p>Own the physical disc</p>
+          </div>
+          <div id="buyPrice" class="price-tag">₹0</div>
+        </div>
+
+        <div class="option-box" onclick="selectOption(this, 'Rent')">
+          <div class="option-info">
+            <h3>7-Day Rental</h3>
+            <p>Play for a week</p>
+          </div>
+          <div id="rentPrice" class="price-tag">₹0</div>
+        </div>
+      </div>
+
+      <button class="action-button" onclick="goToCheckout()">Proceed to Checkout →</button>
     </div>
   </div>
 
   <script>
-    // Get background image from URL parameter
-    const params = new URLSearchParams(window.location.search);
-    const bg = params.get("bg");
-    if(bg) {
-      document.body.style.backgroundImage = `url('${bg}')`;
+    const urlParams = new URLSearchParams(window.location.search);
+    const gameName  = urlParams.get('game')  || "Unknown Game";
+    const imageSrc  = urlParams.get('img')   || "images/placeholder.jpg";
+    const rawPrice  = urlParams.get('price');
+    const basePrice = parseInt(rawPrice) || 1599;
+    const calculatedRent = Math.round(basePrice * 0.3);
+
+    document.getElementById('gameTitle').innerText = gameName;
+    document.getElementById('gameImg').src = imageSrc;
+    document.getElementById('buyPrice').innerText  = "₹" + basePrice.toLocaleString('en-IN');
+    document.getElementById('rentPrice').innerText = "₹" + calculatedRent.toLocaleString('en-IN');
+
+    let selectedMode = 'Buy';
+
+    function selectOption(el, mode) {
+      document.querySelectorAll('.option-box').forEach(box => box.classList.remove('active'));
+      el.classList.add('active');
+      selectedMode = mode;
+    }
+
+    function goToCheckout() {
+      // Pass all needed data to the checkout page via URL params
+      const params = new URLSearchParams({
+        game:  gameName,
+        img:   imageSrc,
+        price: basePrice,
+        mode:  selectedMode
+      });
+      window.location.href = 'checkout.html?' + params.toString();
     }
   </script>
 </body>
